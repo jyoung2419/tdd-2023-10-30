@@ -4,6 +4,8 @@ public class Calc {
     public static int run(String exp) {
         if (exp.isBlank()) return 0;
 
+        exp = stripOuterParentheses(exp);
+
         final String[] expBits = exp.split(" ");
         final String sign = expBits[1];
 
@@ -22,5 +24,13 @@ public class Calc {
         };
 
         return rs;
+    }
+
+    private static String stripOuterParentheses(String exp) {
+        if (exp.startsWith("(") && exp.endsWith(")")) {
+            return exp.substring(1, exp.length() - 1);
+        }
+
+        return exp;
     }
 }
